@@ -6,7 +6,7 @@ function App() {
     const [currentDiceNumbers, setCurrentDiceNumbers] = useState([createDiceNumber(),createDiceNumber(),createDiceNumber(),createDiceNumber(), createDiceNumber()]);
     const [dicesMarkedForRethrow, setDicesForRethrow] = useState<number[]>([]);
 
-    function markForRethrow(index: number) {
+    function selectForRethrow(index: number) {
         if (dicesMarkedForRethrow.includes(index)) {
             setDicesForRethrow(
                 dicesMarkedForRethrow.filter(item => item !== index));
@@ -34,8 +34,9 @@ function App() {
         <div>
             {currentDiceNumbers.map((numberOfDice, index)=>(
                 <button
-                    onClick={() => markForRethrow(index)}
-                    key={index}>
+                    onClick={() => selectForRethrow(index)}
+                    key={index}
+                    className={dicesMarkedForRethrow.includes(index)? "marked" :""}>
                     {numberOfDice}
                 </button>
             ))}
