@@ -1,10 +1,12 @@
 import React, {JSXElementConstructor, useState} from 'react';
 import './App.css';
+import {createDiceNumber} from "./appFunctions";
 
-function App() {
+export function App() {
 
     const [currentDiceNumbers, setCurrentDiceNumbers] = useState([createDiceNumber(),createDiceNumber(),createDiceNumber(),createDiceNumber(), createDiceNumber()]);
     const [dicesMarkedForRethrow, setDicesForRethrow] = useState<number[]>([]);
+    const [score, setScore] = useState<number[]>();
 
     function selectForRethrow(index: number) {
         if (dicesMarkedForRethrow.includes(index)) {
@@ -15,11 +17,6 @@ function App() {
                 dicesMarkedForRethrow => [...dicesMarkedForRethrow, index]);
         }
     }
-
-    function createDiceNumber() {
-        return Math.floor(Math.random() * 6 + 1);
-    }
-
     function rollSelectedDices(selectedDices: number[]) {
         const newDiceNumbers: number[] =
         currentDiceNumbers.map((diceNumber, index) =>(
