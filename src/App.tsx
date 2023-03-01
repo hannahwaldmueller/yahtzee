@@ -1,43 +1,33 @@
 import React, {JSXElementConstructor, useState} from 'react';
 import './App.css';
-import {createDiceNumber} from "./appFunctions";
+import {createDiceNumber, SetOfDice, updateDiceNumbers, updateRethrowSelection} from "./appFunctions";
 
 export function App() {
 
-    const [currentDiceNumbers, setCurrentDiceNumbers] = useState([createDiceNumber(),createDiceNumber(),createDiceNumber(),createDiceNumber(), createDiceNumber()]);
-    const [dicesMarkedForRethrow, setDicesForRethrow] = useState<number[]>([]);
+    const [currentDiceNumbers, setCurrentDiceNumbers] = useState<SetOfDice>([createDiceNumber(),createDiceNumber(),createDiceNumber(),createDiceNumber(), createDiceNumber()]);
+    const [diceMarkedForRethrow, setDiceForRethrow] = useState<number[]>([]);
     const [score, setScore] = useState<number[]>();
 
-    function selectForRethrow(index: number) {
-        if (dicesMarkedForRethrow.includes(index)) {
-            setDicesForRethrow(
-                dicesMarkedForRethrow.filter(item => item !== index));
-        } else {
-            setDicesForRethrow(
-                dicesMarkedForRethrow => [...dicesMarkedForRethrow, index]);
-        }
+    function toggleRethrowMarker(index: number) {
+        setDiceForRethrow(updateRethrowSelection(diceMarkedForRethrow, index));
     }
-    function rollSelectedDices(selectedDices: number[]) {
-        const newDiceNumbers: number[] =
-        currentDiceNumbers.map((diceNumber, index) =>(
-            (selectedDices.includes(index))? createDiceNumber(): diceNumber
-            )
-        )
-        setDicesForRethrow([]);
-        setCurrentDiceNumbers(newDiceNumbers);
+
+    function rollSelectedDice(selectedDices: number[]) {
+        setDiceForRethrow([]);
+        setCurrentDiceNumbers(updateDiceNumbers(selectedDices,currentDiceNumbers));
     }
 
     return (
         <div>
             {currentDiceNumbers.map((numberOfDice, index)=>(
                 <button
-                    onClick={() => selectForRethrow(index)}
+                    onClick={() => toggleRethrowMarker(index)}
                     key={index}
-                    className={dicesMarkedForRethrow.includes(index)? "marked" :""}>
+                    className={diceMarkedForRethrow.includes(index)? "marked" :""}>
                     {numberOfDice}
                 </button>
             ))}
-            <button onClick={() => rollSelectedDices(dicesMarkedForRethrow)}>Roll selected dices</button>
+            <button onClick={() => rollSelectedDice(diceMarkedForRethrow)}>Roll selected dice</button>
         </div>
   );
 }
