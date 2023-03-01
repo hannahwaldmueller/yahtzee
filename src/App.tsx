@@ -1,25 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {JSXElementConstructor, useState} from 'react';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    const [currentDiceNumbers, setCurrentDiceNumbers] = useState([createDiceNumber(),createDiceNumber(),createDiceNumber(),createDiceNumber(), createDiceNumber()]);
+    const [dicesMarkedForRethrow, setDicesForRethrow] = useState<number[]>([]);
+
+    function markForRethrow(index: number) {
+        if (dicesMarkedForRethrow.includes(index)) {
+            setDicesForRethrow(
+                dicesMarkedForRethrow.filter(item => item !== index));
+        } else {
+            setDicesForRethrow(
+                dicesMarkedForRethrow => [...dicesMarkedForRethrow, index]);
+        }
+    }
+
+    function createDiceNumber() {
+        return Math.floor(Math.random() * 6 + 1);
+    }
+
+    function rollSelectedDices(selectedDices: number[]) {
+        const newDiceNumbers: number[] =
+        currentDiceNumbers.map((diceNumber, index) =>(
+            (selectedDices.includes(index))? createDiceNumber(): diceNumber
+            )
+        )
+        setDicesForRethrow([]);
+        setCurrentDiceNumbers(newDiceNumbers);
+    }
+
+    return (
+        <div>
+            {currentDiceNumbers.map((numberOfDice, index)=>(
+                <button
+                    onClick={() => markForRethrow(index)}
+                    key={index}>
+                    {numberOfDice}
+                </button>
+            ))}
+            <button onClick={() => rollSelectedDices(dicesMarkedForRethrow)}>Roll selected dices</button>
+        </div>
   );
 }
 
