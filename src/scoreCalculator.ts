@@ -15,5 +15,13 @@ export function calculateYahtzee(dices: SetOfDice): number {
 }
 
 export function calculateLargeStrait(dices: SetOfDice): number {
+    let numbersWithoutDuplicates = new Set(dices);
+    if (numbersWithoutDuplicates.size !== dices.length) {
+        return 0;
+    }
+    let sortedDice = dices.sort();
+    if (sortedDice[4]-sortedDice[0] === 4) {
+        return 40;
+    }
     return 0;
 }
