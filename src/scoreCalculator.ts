@@ -1,5 +1,22 @@
 import {SetOfDice} from "./appFunctions";
 
+export type ScoreMap = Map<ScoreCategories, number|null>
+export enum ScoreCategories {
+    Aces=1,
+    Twos,
+    Threes,
+    Fours,
+    Fives,
+    Sixes,
+    Three_Of_A_Kind,
+    Four_Of_A_Kind,
+    Full_House,
+    Small_Strait,
+    Large_Strait,
+    Yahtzee,
+    Chance
+}
+
 export function calculateChance(dices: SetOfDice): number {
     let sum: number = 0;
     for (let dice of dices) {
