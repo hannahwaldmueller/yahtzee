@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import {createDiceNumber, SetOfDice, updateDiceNumbers, updateRethrowSelection} from "./appFunctions";
-import {ScoreCategories, ScoreMap} from "./scoreCalculator";
+import {calculateScoreForCategory, ScoreCategories, ScoreMap} from "./scoreCalculator";
 
 export function App() {
 
@@ -22,7 +22,7 @@ export function App() {
 
     function setScoreForCategory (categoryNumber: ScoreCategories) {
         let newScore: ScoreMap = new Map<ScoreCategories, number | null>(score);
-        newScore.set(categoryNumber,7);
+        newScore.set(categoryNumber,calculateScoreForCategory(currentDiceNumbers,categoryNumber));
         setScore(newScore);
     }
 

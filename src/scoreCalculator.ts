@@ -16,7 +16,18 @@ export enum ScoreCategories {
     Yahtzee,
     Chance
 }
-
+export function calculateScoreForCategory(dice: SetOfDice, category: ScoreCategories): number {
+    switch (category) {
+        case ScoreCategories.Large_Strait:
+            return calculateLargeStrait(dice);
+        case ScoreCategories.Chance:
+            return calculateChance(dice);
+        case ScoreCategories.Yahtzee:
+            return calculateYahtzee(dice);
+        default:
+            return 0;
+    }
+}
 export function calculateChance(dices: SetOfDice): number {
     let sum: number = 0;
     for (let dice of dices) {
