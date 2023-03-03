@@ -19,9 +19,26 @@ export enum ScoreCategories {
 }
 export function calculateScoreForCategory(dice: SetOfDice, category: ScoreCategories): number {
     switch (category) {
-        case ScoreCategories.Aces: {
+        case ScoreCategories.Aces:
             return calculateUpperSectionCategory(dice,ScoreCategories.Aces);
-        }
+        case ScoreCategories.Twos:
+            return calculateUpperSectionCategory(dice,ScoreCategories.Twos);
+        case ScoreCategories.Threes:
+            return calculateUpperSectionCategory(dice,ScoreCategories.Threes);
+        case ScoreCategories.Fours:
+            return calculateUpperSectionCategory(dice,ScoreCategories.Fours);
+        case ScoreCategories.Fives:
+            return calculateUpperSectionCategory(dice,ScoreCategories.Fives);
+        case ScoreCategories.Sixes:
+            return calculateUpperSectionCategory(dice,ScoreCategories.Sixes);
+        case ScoreCategories.Three_Of_A_Kind:
+            return calculateThreeOfAKind(dice);
+        case ScoreCategories.Four_Of_A_Kind:
+            return calculateFourOfAKind(dice);
+        case ScoreCategories.Full_House:
+            return calculateFullHouse(dice);
+        case ScoreCategories.Small_Strait:
+            return calculateSmallStrait(dice);
         case ScoreCategories.Large_Strait:
             return calculateLargeStrait(dice);
         case ScoreCategories.Chance:
@@ -35,7 +52,33 @@ export function calculateScoreForCategory(dice: SetOfDice, category: ScoreCatego
 
 export function calculateUpperSectionCategory(dice: SetOfDice, category: ScoreCategories): number {
     const diceToSumUp: number[] = dice.filter((die:number) => die === category);
-    return sumUpAllDice(diceToSumUp);
+    return sumUpDice(diceToSumUp);
+}
+export function calculateFullHouse(dice: SetOfDice): number {
+    let numbersWithoutDuplicates = new Set(dice);
+    if (numbersWithoutDuplicates.size === 2) {
+        const allDiceOfOneKind: number[] = dice.filter((die)=>die === dice[0]);
+        if (allDiceOfOneKind.length === 2 || allDiceOfOneKind.length === 3) {
+            return ScoreConstants.FULL_HOUSE;
+        }
+    }
+    return 0;
+}
+export function calculateThreeOfAKind(dice: SetOfDice): number {
+    const instancesOfFirstDie = dice.filter((die)=> die===dice[0]);
+    const instancesOfSecondDie = dice.filter((die)=> die===dice[1]);
+    const instancesOfThirdDie = dice.filter((die) => die === dice[2]);
+    if (instancesOfFirstDie.length === 3 || instancesOfSecondDie.length ===3 || instancesOfThirdDie.length ===3) {
+        return sumUpDice(dice);
+    }
+    return 0;
+}
+export function calculateFourOfAKind(dice: SetOfDice): number {
+    let numbersWithoutDuplicates = new Set(dice);
+    if (numbersWithoutDuplicates.size < 3) {
+        return sumUpDice(dice);
+    }
+    return 0;
 }
 export function calculateSmallStrait(dice: SetOfDice): number {
     let numbersWithoutDuplicates = new Set(dice);
@@ -69,7 +112,7 @@ export function calculateYahtzee(dice: SetOfDice): number {
     return 0;
 }
 
-function sumUpAllDice(dice: number[]) {
+function sumUpDice(dice: number[]) {
     let sum: number = 0;
     for (let die of dice) {
         sum += die;
@@ -78,5 +121,5 @@ function sumUpAllDice(dice: number[]) {
 }
 
 export function calculateChance(dice: SetOfDice): number {
-    return sumUpAllDice(dice);
+    return sumUpDice(dice);
 }
