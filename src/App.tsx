@@ -26,12 +26,12 @@ export function App() {
         setScore(newScore);
     }
 
-    for (let i = ScoreCategories.Aces; i <= ScoreCategories.Chance; i++) {
+    for (let category = ScoreCategories.Aces; category <= ScoreCategories.Chance; category++) {
         scoreFields.push(
             <button
-                onClick={() => setScoreForCategory(i)}
-                key={i}>
-                {ScoreCategories[i]}{score.get(i)}
+                onClick={() => setScoreForCategory(category)}
+                key={category}>
+                {ScoreCategories[category]}{score.get(category)}
             </button>
         )
     }
