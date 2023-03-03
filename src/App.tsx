@@ -26,13 +26,20 @@ export function App() {
         setScore(newScore);
     }
 
+    function getScoreForCategory(categoryNumber: ScoreCategories) {
+
+    }
+
     for (let category = ScoreCategories.Aces; category <= ScoreCategories.Chance; category++) {
         scoreFields.push(
-            <button
+            <tr>
+                <td
                 onClick={() => setScoreForCategory(category)}
                 key={category}>
-                {ScoreCategories[category]}{score.get(category)}
-            </button>
+                {ScoreCategories[category]}
+                </td>
+                <td width={"100px"}>{score.get(category)}</td>
+            </tr>
         )
     }
 
@@ -49,11 +56,10 @@ export function App() {
                 ))}
                 <button onClick={() => rollSelectedDice(diceMarkedForRethrow)}>Roll selected dice</button>
             </div>
-            <div>
-                {scoreFields}
-            </div>
+            <table>
+                    {scoreFields}
+            </table>
         </div>
-
   );
 }
 
