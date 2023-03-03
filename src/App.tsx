@@ -26,7 +26,7 @@ export function App() {
         setScore(newScore);
     }
 
-    for (let i = ScoreCategories.Aces; i < ScoreCategories.Yahtzee; i++) {
+    for (let i = ScoreCategories.Aces; i <= ScoreCategories.Chance; i++) {
         scoreFields.push(
             <button
                 onClick={() => setScoreForCategory(i)}
