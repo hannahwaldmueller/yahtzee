@@ -1,4 +1,11 @@
-import {calculateChance, calculateLargeStrait, calculateSmallStrait, calculateYahtzee} from "../src/scoreCalculator";
+import {
+    calculateChance,
+    calculateLargeStrait,
+    calculateSmallStrait,
+    calculateUpperSectionCategory,
+    calculateYahtzee,
+    ScoreCategories
+} from "../src/scoreCalculator";
 import {SetOfDice} from "../src/appFunctions";
 import {ScoreConstants} from "../src/constants";
 
@@ -13,6 +20,11 @@ describe('scoreCalculator', () => {
     describe('calculateChance', () => {
         test('sums up all dice', () => {
             expect(calculateChance(chance_of_15)).toEqual(15);
+        })
+    })
+    describe('calculateUpperSectionCategory', () => {
+        test('sums up all aces', () => {
+            expect(calculateUpperSectionCategory(almost_yahtzee,ScoreCategories.Aces)).toEqual(4);
         })
     })
     describe('calculateYahtzee', () => {

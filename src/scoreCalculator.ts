@@ -19,6 +19,9 @@ export enum ScoreCategories {
 }
 export function calculateScoreForCategory(dice: SetOfDice, category: ScoreCategories): number {
     switch (category) {
+        case ScoreCategories.Aces: {
+            return calculateUpperSectionCategory(dice,ScoreCategories.Aces);
+        }
         case ScoreCategories.Large_Strait:
             return calculateLargeStrait(dice);
         case ScoreCategories.Chance:
@@ -30,6 +33,10 @@ export function calculateScoreForCategory(dice: SetOfDice, category: ScoreCatego
     }
 }
 
+export function calculateUpperSectionCategory(dice: SetOfDice, category: ScoreCategories): number {
+    const diceToSumUp: number[] = dice.filter((die:number) => die === category);
+    return sumUpAllDice(diceToSumUp);
+}
 export function calculateSmallStrait(dice: SetOfDice): number {
     let numbersWithoutDuplicates = new Set(dice);
     let countOfDifferentNumbers = numbersWithoutDuplicates.size;
@@ -55,7 +62,6 @@ export function calculateLargeStrait(dice: SetOfDice): number {
     }
     return 0;
 }
-
 export function calculateYahtzee(dice: SetOfDice): number {
     if (dice.every((die) => die === dice[0])) {
         return 50;
@@ -63,10 +69,14 @@ export function calculateYahtzee(dice: SetOfDice): number {
     return 0;
 }
 
-export function calculateChance(dice: SetOfDice): number {
+function sumUpAllDice(dice: number[]) {
     let sum: number = 0;
     for (let die of dice) {
         sum += die;
     }
     return sum;
+}
+
+export function calculateChance(dice: SetOfDice): number {
+    return sumUpAllDice(dice);
 }
