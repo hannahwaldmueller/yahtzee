@@ -15,7 +15,7 @@ export function App() {
 
     function rollSelectedDice(selectedDices: number[]) {
         setDiceForRethrow([]);
-        setCurrentDiceNumbers(updateDiceNumbers(selectedDices,currentDiceNumbers));
+        setCurrentDiceNumbers(()=>updateDiceNumbers(selectedDices,currentDiceNumbers));
     }
 
     const scoreFields: any[] = [];
