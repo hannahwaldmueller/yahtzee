@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import {createDiceNumber, SetOfDice, updateDiceNumbers, updateRethrowSelection} from "./appFunctions";
+import {createDiceNumber, SetOfDice, updateDiceNumbers, updateRethrowSelection} from "./diceFunctions";
 import {ScoreSheet} from "./ScoreSheet";
 
 export function App() {

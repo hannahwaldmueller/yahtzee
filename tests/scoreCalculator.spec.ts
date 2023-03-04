@@ -5,7 +5,7 @@ import {
     calculateUpperSectionCategory,
     calculateYahtzee,
 } from "../src/scoreCalculator";
-import {SetOfDice} from "../src/appFunctions";
+import {SetOfDice} from "../src/diceFunctions";
 import {ScoreConstants} from "../src/constants";
 import {ScoreCategories} from "../src/scoreCategories";
 

@@ -1,4 +1,4 @@
-import {SetOfDice} from "./appFunctions";
+import {SetOfDice} from "./diceFunctions";
 import {ScoreConstants} from "./constants";
 import {ScoreCategories} from "./scoreCategories";
 

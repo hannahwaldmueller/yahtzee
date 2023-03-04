@@ -1,4 +1,4 @@
-import {createDiceNumber} from "../src/appFunctions";
+import {createDiceNumber} from "../src/diceFunctions";
 
 describe('appFunctions', () => {
     describe('createDiceNumber', () => {
