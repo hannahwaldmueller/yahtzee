@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
 import {createDiceNumber, SetOfDice, updateDiceNumbers, updateRethrowSelection} from "./appFunctions";
-import {calculateScoreForCategory, ScoreCategories, ScoreMap} from "./scoreCalculator";
 import {ScoreSheet} from "./ScoreSheet";
 
 export function App() {

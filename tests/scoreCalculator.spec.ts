@@ -4,10 +4,10 @@ import {
     calculateSmallStrait, calculateThreeOfAKind,
     calculateUpperSectionCategory,
     calculateYahtzee,
-    ScoreCategories
 } from "../src/scoreCalculator";
 import {SetOfDice} from "../src/appFunctions";
 import {ScoreConstants} from "../src/constants";
+import {ScoreCategories} from "../src/scoreCategories";
 
 const full_house: SetOfDice = [1,3,3,3,1];
 const three_of_a_kind: SetOfDice = [1,4,2,4,4];
@@ -32,6 +32,9 @@ describe('scoreCalculator', () => {
         })
         test('accepts three of a kind and two singles', () => {
             expect(calculateThreeOfAKind(three_of_a_kind)).toEqual(15);
+        })
+        test ('accepts four of a kind', () => {
+            expect(calculateThreeOfAKind(four_of_a_kind)).toEqual(26);
         })
         test('awards zero for small strait', () => {
             expect(calculateThreeOfAKind(small_strait)).toEqual(0);

@@ -1,22 +1,9 @@
 import {SetOfDice} from "./appFunctions";
 import {ScoreConstants} from "./constants";
+import {ScoreCategories} from "./scoreCategories";
 
 export type ScoreMap = Map<ScoreCategories, number|null>
-export enum ScoreCategories {
-    Aces=1,
-    Twos,
-    Threes,
-    Fours,
-    Fives,
-    Sixes,
-    Three_Of_A_Kind,
-    Four_Of_A_Kind,
-    Full_House,
-    Small_Strait,
-    Large_Strait,
-    Yahtzee,
-    Chance
-}
+
 export function calculateScoreForCategory(dice: SetOfDice, category: ScoreCategories): number {
     switch (category) {
         case ScoreCategories.Aces:
@@ -68,7 +55,7 @@ export function calculateThreeOfAKind(dice: SetOfDice): number {
     const instancesOfFirstDie = dice.filter((die)=> die===dice[0]);
     const instancesOfSecondDie = dice.filter((die)=> die===dice[1]);
     const instancesOfThirdDie = dice.filter((die) => die === dice[2]);
-    if (instancesOfFirstDie.length === 3 || instancesOfSecondDie.length ===3 || instancesOfThirdDie.length ===3) {
+    if (instancesOfFirstDie.length >= 3 || instancesOfSecondDie.length >=3 || instancesOfThirdDie.length >=3) {
         return sumUpDice(dice);
     }
     return 0;
@@ -111,6 +98,9 @@ export function calculateYahtzee(dice: SetOfDice): number {
     }
     return 0;
 }
+export function calculateChance(dice: SetOfDice): number {
+    return sumUpDice(dice);
+}
 
 function sumUpDice(dice: number[]) {
     let sum: number = 0;
@@ -120,6 +110,3 @@ function sumUpDice(dice: number[]) {
     return sum;
 }
 
-export function calculateChance(dice: SetOfDice): number {
-    return sumUpDice(dice);
-}

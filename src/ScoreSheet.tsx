@@ -1,6 +1,7 @@
 import React, {useState} from "react";
-import {calculateScoreForCategory, ScoreCategories, ScoreMap} from "./scoreCalculator";
+import {calculateScoreForCategory, ScoreMap} from "./scoreCalculator";
 import {SetOfDice} from "./appFunctions";
+import {ScoreCategories} from "./scoreCategories";
 
 export function ScoreSheet(currentDiceNumbers: SetOfDice) {
 
