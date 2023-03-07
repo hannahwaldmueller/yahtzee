@@ -3,20 +3,17 @@ import {calculateScoreForCategory, ScoreMap} from "./scoreCalculator";
 import {SetOfDice} from "./diceFunctions";
 import {ScoreCategories} from "./scoreCategories";
 
-export function ScoreSheet(currentDiceNumbers: SetOfDice) {
+export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCategories, number | null>, updateScore: (newScore: ScoreMap) => void) {
 
-    const [score, setScore] = useState<ScoreMap>(new Map());
     const [selectedCategory, setSelectedCategory] = useState<ScoreCategories|null>();
     function onConfirmButtonClick (categoryNumber: ScoreCategories) {
-        function setScoreForCategory() {
-            let newScore: ScoreMap = new Map<ScoreCategories, number | null>(score);
-            newScore.set(categoryNumber, calculateScoreForCategory(currentDiceNumbers, categoryNumber));
-            setScore(newScore);
-        }
+        let newScore: ScoreMap = new Map<ScoreCategories, number | null>(score);
+        newScore.set(categoryNumber, calculateScoreForCategory(currentDiceNumbers, categoryNumber));
+        updateScore(newScore);
 
-        setScoreForCategory();
         setSelectedCategory(null);
     }
+
     const scoreFields: any[] = [];
 
     for (let category = ScoreCategories.Aces; category <= ScoreCategories.Chance; category++) {
