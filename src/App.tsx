@@ -4,6 +4,8 @@ import {createDiceNumber, SetOfDice, updateDiceNumbers, updateRethrowSelection} 
 import {ScoreSheet} from "./ScoreSheet";
 import {Dice} from "./Dice";
 import {ScoreMap} from "./scoreCalculator";
+import {ScoreCategories} from "./scoreCategories";
+import {ScoreConstants} from "./constants";
 
 export function App() {
     const [currentDiceNumbers, setCurrentDiceNumbers] = useState<SetOfDice>([createDiceNumber(),createDiceNumber(),createDiceNumber(),createDiceNumber(), createDiceNumber()]);
@@ -15,15 +17,15 @@ export function App() {
         setCurrentDiceNumbers(()=>updateDiceNumbers([0,1,2,3,4], currentDiceNumbers));
         setRemainingRethrows(2);
     }
-
     const updateScore = (newScore: ScoreMap) => {
         setScore(newScore);
-        resetDice();
+        if (score.size !== ScoreConstants.NUMBER_OF_SCORE_CATEGORIES) {
+            resetDice();
+        }
     }
     const toggleRethrowMarker = (index: number)  => {
         setDiceForRethrow(updateRethrowSelection(diceMarkedForRethrow, index));
     }
-
     function rollSelectedDice(selectedDices: number[]) {
         setDiceForRethrow([]);
         setCurrentDiceNumbers(()=>updateDiceNumbers(selectedDices,currentDiceNumbers));
@@ -32,12 +34,13 @@ export function App() {
 
     let options;
 
-    if (remainingRethrows) {
-        options = <button onClick={() => rollSelectedDice(diceMarkedForRethrow)}>Roll selected dice</button>
-    } else {
-        options = <div>No rethrows remain. Please select a category from the score sheet.</div>
+   if (score.size !== ScoreConstants.NUMBER_OF_SCORE_CATEGORIES) {
+        if (remainingRethrows) {
+            options = <button onClick={() => rollSelectedDice(diceMarkedForRethrow)}>Roll selected dice</button>
+        } else {
+            options = <div>No rethrows remain. Please select a category from the score sheet.</div>
+        }
     }
-
     return (
         <div>
             {Dice(currentDiceNumbers, diceMarkedForRethrow, toggleRethrowMarker)}

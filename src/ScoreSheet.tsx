@@ -1,7 +1,8 @@
 import React, {useState} from "react";
-import {calculateScoreForCategory, ScoreMap} from "./scoreCalculator";
+import {calculateScoreForCategory, calculateTotal, ScoreMap} from "./scoreCalculator";
 import {SetOfDice} from "./diceFunctions";
 import {ScoreCategories} from "./scoreCategories";
+import {ScoreConstants} from "./constants";
 
 export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCategories, number | null>, updateScore: (newScore: ScoreMap) => void) {
 
@@ -28,6 +29,12 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
         )
     }
 
+    let totalScore;
+
+    if (score.size === ScoreConstants.NUMBER_OF_SCORE_CATEGORIES) {
+        totalScore = calculateTotal(score);
+    }
+
     let setScoreButton;
 
     if (selectedCategory) {
@@ -43,6 +50,7 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
                  {scoreFields}
                  </tbody>
              </table>
+             {totalScore}
              {setScoreButton}
          </div>
      );
