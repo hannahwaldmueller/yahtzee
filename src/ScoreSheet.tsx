@@ -6,18 +6,23 @@ import {ScoreCategories} from "./scoreCategories";
 export function ScoreSheet(currentDiceNumbers: SetOfDice) {
 
     const [score, setScore] = useState<ScoreMap>(new Map());
-    function setScoreForCategory (categoryNumber: ScoreCategories) {
-        let newScore: ScoreMap = new Map<ScoreCategories, number | null>(score);
-        newScore.set(categoryNumber,calculateScoreForCategory(currentDiceNumbers,categoryNumber));
-        setScore(newScore);
-    }
+    const [selectedCategory, setSelectedCategory] = useState<ScoreCategories|null>();
+    function onConfirmButtonClick (categoryNumber: ScoreCategories) {
+        function setScoreForCategory() {
+            let newScore: ScoreMap = new Map<ScoreCategories, number | null>(score);
+            newScore.set(categoryNumber, calculateScoreForCategory(currentDiceNumbers, categoryNumber));
+            setScore(newScore);
+        }
 
+        setScoreForCategory();
+        setSelectedCategory(null);
+    }
     const scoreFields: any[] = [];
 
     for (let category = ScoreCategories.Aces; category <= ScoreCategories.Chance; category++) {
         scoreFields.push(
             <tr key={category}
-                onClick={() => setScoreForCategory(category)}>
+                onClick={()=>setSelectedCategory(category)}>
                 <td>
                     {ScoreCategories[category]}
                 </td>
@@ -26,9 +31,22 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice) {
         )
     }
 
-     return  <table>
-         <tbody>
-         {scoreFields}
-         </tbody>
-     </table>;
+    let setScoreButton;
+
+    if (selectedCategory) {
+        let scoreForCategory = calculateScoreForCategory(currentDiceNumbers, selectedCategory);
+        setScoreButton = <button onClick={() => onConfirmButtonClick(selectedCategory)}
+        >Click to confirm {scoreForCategory} points for category {ScoreCategories[selectedCategory]}</button>
+    }
+
+     return  (
+         <div>
+             <table>
+                 <tbody>
+                 {scoreFields}
+                 </tbody>
+             </table>
+             {setScoreButton}
+         </div>
+     );
 }
