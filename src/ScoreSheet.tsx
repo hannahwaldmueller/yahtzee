@@ -7,13 +7,6 @@ import {ScoreConstants} from "./constants";
 export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCategories, number | null>, updateScore: (newScore: ScoreMap) => void) {
 
     const [selectedCategory, setSelectedCategory] = useState<ScoreCategories|null>();
-    function onConfirmButtonClick (categoryNumber: ScoreCategories) {
-        let newScore: ScoreMap = new Map<ScoreCategories, number | null>(score);
-        newScore.set(categoryNumber, calculateScoreForCategory(currentDiceNumbers, categoryNumber));
-        updateScore(newScore);
-
-        setSelectedCategory(null);
-    }
 
     const scoreFields: any[] = [];
 
@@ -28,19 +21,35 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
             </tr>
         )
     }
+    function onConfirmButtonClick (categoryNumber: ScoreCategories) {
+        let newScore: ScoreMap = new Map<ScoreCategories, number | null>(score);
+        newScore.set(categoryNumber, calculateScoreForCategory(currentDiceNumbers, categoryNumber));
+        updateScore(newScore);
 
-    let totalScore;
-
-    if (score.size === ScoreConstants.NUMBER_OF_SCORE_CATEGORIES) {
-        totalScore = calculateTotal(score);
+        setSelectedCategory(null);
     }
 
-    let setScoreButton;
+    let totalScore;
+    function gameOver() {
+        return score.size === ScoreConstants.NUMBER_OF_SCORE_CATEGORIES;
+    }
 
-    if (selectedCategory) {
-        let scoreForCategory = calculateScoreForCategory(currentDiceNumbers, selectedCategory);
-        setScoreButton = <button onClick={() => onConfirmButtonClick(selectedCategory)}
-        >Click to confirm {scoreForCategory} points for category {ScoreCategories[selectedCategory]}</button>
+    if (gameOver()) {
+        totalScore = <div>Your score is {calculateTotal(score)}</div>
+    }
+
+    let scoreOption;
+
+    if (selectedCategory && !gameOver()) {
+        if (score.has(selectedCategory)) {
+            scoreOption =
+                <div>Points for category {ScoreCategories[selectedCategory]} are already set. Please choose a different
+                    category.</div>
+        } else {
+            let scoreForCategory = calculateScoreForCategory(currentDiceNumbers, selectedCategory);
+            scoreOption = <button onClick={() => onConfirmButtonClick(selectedCategory)}
+            >Click to confirm {scoreForCategory} points for category {ScoreCategories[selectedCategory]}</button>
+        }
     }
 
      return  (
@@ -51,7 +60,7 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
                  </tbody>
              </table>
              {totalScore}
-             {setScoreButton}
+             {scoreOption}
          </div>
      );
 }
