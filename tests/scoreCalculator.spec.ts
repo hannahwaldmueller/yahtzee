@@ -1,9 +1,13 @@
 import {
-    calculateChance, calculateFourOfAKind, calculateFullHouse,
+    calculateChance,
+    calculateFourOfAKind,
+    calculateFullHouse,
     calculateLargeStrait,
-    calculateSmallStrait, calculateThreeOfAKind,
+    calculateSmallStrait,
+    calculateThreeOfAKind, calculateTotal,
     calculateUpperSectionCategory,
     calculateYahtzee,
+    ScoreMap,
 } from "../src/scoreCalculator";
 import {SetOfDice} from "../src/diceFunctions";
 import {ScoreConstants} from "../src/constants";
@@ -18,12 +22,29 @@ const almost_yahtzee: SetOfDice = [1,1,1,1,2];
 const large_strait_1: SetOfDice = [1,2,3,4,5];
 const large_strait_2: SetOfDice = [2,3,4,5,6];
 const small_strait: SetOfDice = [1,2,3,4,6];
+const total_no_bonus: ScoreMap = new Map<ScoreCategories, number | null>([[1,2],[2,6],[3,9],[4,12],[5,15],[6,18],[7,26],[8,24],[9,0],[10,30],[11,0],[12,50],[13,18]]);
+const total_bonus: ScoreMap = new Map<ScoreCategories, number | null>([[1,3],[2,6],[3,9],[4,12],[5,15],[6,18],[7,26],[8,24],[9,0],[10,30],[11,0],[12,50],[13,18]]);
 
 describe('scoreCalculator', () => {
 
     describe('calculateUpperSectionCategory', () => {
         test('sums up all aces', () => {
             expect(calculateUpperSectionCategory(almost_yahtzee,ScoreCategories.Aces)).toEqual(4);
+        })
+        test('sums up all twos', () => {
+            expect(calculateUpperSectionCategory(almost_yahtzee,ScoreCategories.Twos)).toEqual(2);
+        })
+        test('sums up all threes', () => {
+            expect(calculateUpperSectionCategory(full_house,ScoreCategories.Threes)).toEqual(9);
+        })
+        test('sums up all fours', () => {
+            expect(calculateUpperSectionCategory(chance_of_15,ScoreCategories.Fours)).toEqual(4);
+        })
+        test('sums up all fives', () => {
+            expect(calculateUpperSectionCategory(four_of_a_kind,ScoreCategories.Fives)).toEqual(20);
+        })
+        test('sums up all sixes', () => {
+            expect(calculateUpperSectionCategory(four_of_a_kind,ScoreCategories.Sixes)).toEqual(6);
         })
     })
     describe('calculateThreeOfAKind', () => {
@@ -77,6 +98,14 @@ describe('scoreCalculator', () => {
     describe('calculateChance', () => {
         test('sums up all dice', () => {
             expect(calculateChance(chance_of_15)).toEqual(15);
+        })
+    })
+    describe('calculateTotal', () => {
+        test ('awards Bonus if upper section score is at least 63', () => {
+            expect(calculateTotal(total_bonus)).toEqual(246);
+        })
+        test('refuses Bonus if upper section score is below 63', () => {
+            expect(calculateTotal(total_no_bonus)).toEqual(210);
         })
     })
 })

@@ -4,7 +4,6 @@ import {createDiceNumber, SetOfDice, updateDiceNumbers, updateRethrowSelection} 
 import {ScoreSheet} from "./ScoreSheet";
 import {Dice} from "./Dice";
 import {ScoreMap} from "./scoreCalculator";
-import {ScoreCategories} from "./scoreCategories";
 import {ScoreConstants} from "./constants";
 
 export function App() {
