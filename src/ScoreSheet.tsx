@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {calculateScoreForCategory, calculateTotal, ScoreMap} from "./scoreCalculator";
+import {calculateScoreForCategory, ScoreMap} from "./scoreCalculator";
 import {SetOfDice} from "./diceFunctions";
 import {ScoreCategories} from "./scoreCategories";
 import {ScoreConstants} from "./constants";
@@ -29,13 +29,8 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
         setSelectedCategory(null);
     }
 
-    let totalScore;
     function gameOver() {
         return score.size === ScoreConstants.NUMBER_OF_SCORE_CATEGORIES;
-    }
-
-    if (gameOver()) {
-        totalScore = <div>Your score is {calculateTotal(score)}</div>
     }
 
     let scoreOption;
@@ -59,7 +54,6 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
                  {scoreFields}
                  </tbody>
              </table>
-             {totalScore}
              {scoreOption}
          </div>
      );

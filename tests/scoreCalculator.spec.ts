@@ -4,14 +4,14 @@ import {
     calculateFullHouse,
     calculateLargeStrait,
     calculateSmallStrait,
-    calculateThreeOfAKind, calculateTotal,
-    calculateUpperSectionCategory,
+    calculateThreeOfAKind, calculateUpperSectionCategory,
     calculateYahtzee,
     ScoreMap,
 } from "../src/scoreCalculator";
 import {SetOfDice} from "../src/diceFunctions";
 import {ScoreConstants} from "../src/constants";
 import {ScoreCategories} from "../src/scoreCategories";
+import {calculateTotal} from "../src/totalScoreCalculator";
 
 const full_house: SetOfDice = [1,3,3,3,1];
 const three_of_a_kind: SetOfDice = [1,4,2,4,4];

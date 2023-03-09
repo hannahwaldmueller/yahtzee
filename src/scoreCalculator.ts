@@ -1,7 +1,6 @@
 import {SetOfDice} from "./diceFunctions";
 import {ScoreConstants} from "./constants";
 import {ScoreCategories} from "./scoreCategories";
-import BONUS = ScoreConstants.BONUS;
 
 export type ScoreMap = Map<ScoreCategories, number|null>
 
@@ -101,24 +100,6 @@ export function calculateYahtzee(dice: SetOfDice): number {
 }
 export function calculateChance(dice: SetOfDice): number {
     return sumUpDice(dice);
-}
-
-export function calculateTotal(score: ScoreMap) {
-    let total: number = 0;
-    let upperSectionTotal: number = 0;
-    for (let category = ScoreCategories.Aces; category <=ScoreCategories.Sixes; ++category) {
-        // @ts-ignore
-        upperSectionTotal +=score.get(category);
-    }
-    if (upperSectionTotal >= ScoreConstants.UPPER_SECTION_TOTAL_REQUIRED_FOR_BONUS) {
-        upperSectionTotal += BONUS;
-    }
-    total += upperSectionTotal;
-    for (let category = ScoreCategories.Three_Of_A_Kind; category<=ScoreCategories.Chance; ++category) {
-        // @ts-ignore
-        total +=score.get(category);
-    }
-    return total;
 }
 
 function sumUpDice(dice: number[]) {
