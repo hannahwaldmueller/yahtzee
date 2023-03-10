@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {calculateScoreForCategory, ScoreMap} from "./scoreCalculator";
 import {SetOfDice} from "./diceFunctions";
 import {ScoreCategories} from "./scoreCategories";
-import {ScoreConstants} from "./constants";
 
 export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCategories, number | null>, updateScore: (newScore: ScoreMap) => void) {
 
@@ -29,13 +28,9 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
         setSelectedCategory(null);
     }
 
-    function gameOver() {
-        return score.size === ScoreConstants.NUMBER_OF_SCORE_CATEGORIES;
-    }
-
     let scoreOption;
 
-    if (selectedCategory && !gameOver()) {
+    if (selectedCategory && !gameOver) {
         if (score.has(selectedCategory)) {
             scoreOption =
                 <div>Points for category {ScoreCategories[selectedCategory]} are already set. Please choose a different
