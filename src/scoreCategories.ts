@@ -1,5 +1,5 @@
 export enum ScoreCategories {
-    Aces=1,
+    Aces = 1,
     Twos,
     Threes,
     Fours,

@@ -1,4 +1,4 @@
-export type SetOfDice = [number,  number, number, number, number]
+export type SetOfDice = [number, number, number, number, number]
 
 export function createDiceNumber() {
     return Math.floor(Math.random() * 6 + 1);
@@ -11,10 +11,10 @@ export function updateRethrowSelection(selectedDiceIds: number[], toggledDiceId:
     return selectedDiceIds.concat([toggledDiceId]);
 }
 
-export function updateDiceNumbers(diceToRethrow: number[],currentDiceNumbers: SetOfDice ): SetOfDice {
+export function updateDiceNumbers(diceToRethrow: number[], currentDiceNumbers: SetOfDice): SetOfDice {
     const newDiceNumbers: number[] =
-        currentDiceNumbers.map((diceNumber,index) => (
-            (diceToRethrow.includes(index))? createDiceNumber() : diceNumber
+        currentDiceNumbers.map((diceNumber, index) => (
+            (diceToRethrow.includes(index)) ? createDiceNumber() : diceNumber
         ))
     return newDiceNumbers as SetOfDice;
 }

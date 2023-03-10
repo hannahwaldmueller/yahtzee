@@ -3,16 +3,16 @@ import {calculateScoreForCategory, ScoreMap} from "./scoreCalculator";
 import {SetOfDice} from "./diceFunctions";
 import {ScoreCategories} from "./scoreCategories";
 
-export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCategories, number | null>, updateScore: (newScore: ScoreMap) => void) {
+export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCategories, number | null>, updateScore: (newScore: ScoreMap) => void, gameOver: boolean) {
 
-    const [selectedCategory, setSelectedCategory] = useState<ScoreCategories|null>();
+    const [selectedCategory, setSelectedCategory] = useState<ScoreCategories | null>();
 
     const scoreFields: any[] = [];
 
     for (let category = ScoreCategories.Aces; category <= ScoreCategories.Chance; category++) {
         scoreFields.push(
             <tr key={category}
-                onClick={()=>setSelectedCategory(category)}>
+                onClick={() => setSelectedCategory(category)}>
                 <td>
                     {ScoreCategories[category]}
                 </td>
@@ -20,7 +20,8 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
             </tr>
         )
     }
-    function onConfirmButtonClick (categoryNumber: ScoreCategories) {
+
+    function onConfirmButtonClick(categoryNumber: ScoreCategories) {
         let newScore: ScoreMap = new Map<ScoreCategories, number | null>(score);
         newScore.set(categoryNumber, calculateScoreForCategory(currentDiceNumbers, categoryNumber));
         updateScore(newScore);
@@ -42,14 +43,14 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
         }
     }
 
-     return  (
-         <div>
-             <table>
-                 <tbody>
-                 {scoreFields}
-                 </tbody>
-             </table>
-             {scoreOption}
-         </div>
-     );
+    return (
+        <div>
+            <table>
+                <tbody>
+                {scoreFields}
+                </tbody>
+            </table>
+            {scoreOption}
+        </div>
+    );
 }
