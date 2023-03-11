@@ -1,4 +1,3 @@
-import BONUS = ScoreConstants.BONUS;
 import {ScoreCategories} from "./scoreCategories";
 import {ScoreConstants} from "./constants";
 import {ScoreMap} from "./scoreCalculator";
@@ -11,7 +10,7 @@ export function calculateTotal(score: ScoreMap) {
         upperSectionTotal += score.get(category);
     }
     if (upperSectionTotal >= ScoreConstants.UPPER_SECTION_TOTAL_REQUIRED_FOR_BONUS) {
-        upperSectionTotal += BONUS;
+        upperSectionTotal += ScoreConstants.BONUS;
     }
     total += upperSectionTotal;
     for (let category = ScoreCategories.Three_Of_A_Kind; category <= ScoreCategories.Chance; ++category) {
