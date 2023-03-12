@@ -4,11 +4,12 @@ export function Dice(currentDiceNumbers: [number, number, number, number, number
 
     return (
         <div>
-            {currentDiceNumbers.map((numberOfDice, index)=>(
+            {currentDiceNumbers.map((numberOfDice, index) => (
                 <button
                     onClick={() => toggleRethrowMarker(index)}
                     key={index}
-                    className={diceMarkedForRethrow.includes(index)? "marked" :""}>
+                    className={diceMarkedForRethrow.includes(index) ? "marked" : ""}
+                    data-testid={"diceButton_".concat(String(index))}>
                     {numberOfDice}
                 </button>
             ))}
