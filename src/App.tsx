@@ -17,7 +17,7 @@ export function App() {
 
     function resetDice() {
         setCurrentDiceNumbers(() => updateDiceNumbers([0, 1, 2, 3, 4], currentDiceNumbers));
-        setRemainingRethrows(2);
+        setRemainingRethrows(ScoreConstants.NUMBER_OF_POSSILE_RETHROWS);
     }
 
     const updateScore = (newScore: ScoreMap) => {

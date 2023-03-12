@@ -6,4 +6,5 @@ export namespace ScoreConstants {
     export const BONUS: number = 35;
     export const UPPER_SECTION_TOTAL_REQUIRED_FOR_BONUS = 63;
     export const NUMBER_OF_SCORE_CATEGORIES = 13;
+    export const NUMBER_OF_POSSILE_RETHROWS = 2;
 }
