@@ -1,5 +1,6 @@
 import React from "react";
 import {SetOfDice, updateDiceNumbers} from "./diceFunctions";
+import {TestIds} from "./testConstants";
 
 export function DiceOption(remainingRethrows: number, diceMarkedForRethrow: number[], currentDiceNumbers: [number, number, number, number, number], updateDiceAndRethrowCount: (newRemainingRethrows: number, newDiceNumbers: SetOfDice) => void) {
     function onRollDiceButtonClick() {
@@ -10,8 +11,8 @@ export function DiceOption(remainingRethrows: number, diceMarkedForRethrow: numb
 
     if (remainingRethrows) {
         return <button onClick={() => onRollDiceButtonClick()}
-                       data-testid="rollDiceButton">Roll selected dice</button>;
+                       data-testid={TestIds.rollDiceBtn}>Roll selected dice</button>;
     }
-    return <div data-testid="noRethrowsMessage">No rethrows remain. Please select a category from the score
+    return <div data-testid={TestIds.noRethrowsMsg}>No rethrows remain. Please select a category from the score
         sheet.</div>;
 }

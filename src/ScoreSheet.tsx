@@ -36,7 +36,7 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
     if (selectedCategory && !gameOver) {
         if (score.has(selectedCategory)) {
             scoreOption =
-                <div data-testid={TestIds.categorySetMessage}>Points for
+                <div data-testid={TestIds.categorySetMsg}>Points for
                     category {ScoreCategories[selectedCategory]} are
                     already set. Please choose a different
                     category.</div>
