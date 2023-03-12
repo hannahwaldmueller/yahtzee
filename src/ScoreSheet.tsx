@@ -14,11 +14,12 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
         scoreFields.push(
             <tr key={category}
                 onClick={() => setSelectedCategory(category)}
+                className="category-box"
                 data-testid={TestIds.categoryButtonPrefix.concat(String(category))}>
                 <td>
                     {ScoreCategories[category]}
                 </td>
-                <td width={"100px"}>{score.get(category)}</td>
+                <td className="score-box">{score.get(category)}</td>
             </tr>
         )
     }
@@ -52,6 +53,10 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
         <div>
             <table>
                 <tbody>
+                <tr>
+                    <th>Category</th>
+                    <th>Points</th>
+                </tr>
                 {scoreFields}
                 </tbody>
             </table>
