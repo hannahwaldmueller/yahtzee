@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {calculateScoreForCategory, ScoreMap} from "./scoreCalculator";
 import {SetOfDice} from "./diceFunctions";
 import {ScoreCategories} from "./scoreCategories";
+import {TestIds} from "./testConstants";
 
 export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCategories, number | null>, updateScore: (newScore: ScoreMap) => void, gameOver: boolean) {
 
@@ -12,7 +13,8 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
     for (let category = ScoreCategories.Aces; category <= ScoreCategories.Chance; category++) {
         scoreFields.push(
             <tr key={category}
-                onClick={() => setSelectedCategory(category)}>
+                onClick={() => setSelectedCategory(category)}
+                data-testid={TestIds.categoryButtonPrefix.concat(String(category))}>
                 <td>
                     {ScoreCategories[category]}
                 </td>
@@ -34,11 +36,14 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
     if (selectedCategory && !gameOver) {
         if (score.has(selectedCategory)) {
             scoreOption =
-                <div>Points for category {ScoreCategories[selectedCategory]} are already set. Please choose a different
+                <div data-testid={TestIds.categorySetMessage}>Points for
+                    category {ScoreCategories[selectedCategory]} are
+                    already set. Please choose a different
                     category.</div>
         } else {
             let scoreForCategory = calculateScoreForCategory(currentDiceNumbers, selectedCategory);
             scoreOption = <button onClick={() => onConfirmButtonClick(selectedCategory)}
+                                  data-testid={TestIds.confirmButton}
             >Click to confirm {scoreForCategory} points for category {ScoreCategories[selectedCategory]}</button>
         }
     }
