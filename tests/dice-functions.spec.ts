@@ -1,4 +1,5 @@
-import {createDiceNumber, SetOfDice, updateDiceNumbers, updateRethrowSelection} from "../src/dice/dice-functions";
+import {createDiceNumber, updateDiceNumbers, updateRethrowSelection} from "../src/dice/dice-functions";
+import {SetOfDice} from "../src/types";
 
 describe('dice-functions', () => {
     describe('createDiceNumber', () => {

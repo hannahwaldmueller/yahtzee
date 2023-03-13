@@ -8,11 +8,10 @@ import {
     calculateUpperSectionCategory,
     calculateYahtzee,
 } from "../src/score/score-calculator";
-import {SetOfDice} from "../src/dice/dice-functions";
-import {ScoreConstants} from "../src/app-constants";
+import {ScoreConstants} from "../src/constants";
 import {ScoreCategories} from "../src/score/score-categories";
 import {calculateTotal} from "../src/score/total-score-calculator";
-import {ScoreMap} from "../src/types";
+import {ScoreMap, SetOfDice} from "../src/types";
 
 const full_house: SetOfDice = [1, 3, 3, 3, 1];
 const three_of_a_kind: SetOfDice = [1, 4, 2, 4, 4];

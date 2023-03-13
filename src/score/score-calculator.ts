@@ -1,4 +1,4 @@
-import {ScoreConstants} from "../app-constants";
+import {ScoreConstants} from "../constants";
 import {ScoreCategories} from "./score-categories";
 import {SetOfDice} from "../types";
 
