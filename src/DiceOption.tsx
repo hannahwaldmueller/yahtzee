@@ -10,7 +10,8 @@ export function DiceOption(remainingRethrows: number, diceMarkedForRethrow: numb
     }
 
     if (remainingRethrows) {
-        return <button onClick={() => onRollDiceButtonClick()}
+        return <button disabled={diceMarkedForRethrow.length === 0}
+                       onClick={() => onRollDiceButtonClick()}
                        data-testid={TestIds.rollDiceBtn}>Roll selected dice</button>;
     }
     return <div data-testid={TestIds.noRethrowsMsg}>No rethrows remain. Please select a category from the score
