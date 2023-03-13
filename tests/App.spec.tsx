@@ -1,7 +1,7 @@
 import React from 'react';
 import {act, fireEvent, render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
-import App from "../src/app/App";
+import App from "../src/App";
 import {TestIds} from "../src/test-constants";
 
 describe('App', () => {

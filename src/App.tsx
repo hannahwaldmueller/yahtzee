@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
-import './App.css';
-import {createDiceNumber, updateDiceNumbers, updateRethrowSelection} from "../dice/dice-functions";
-import {ScoreSheet} from "../score/Score-sheet";
-import {Dice} from "../dice/Dice";
-import {YahtzeeConstants} from "../app-constants";
-import {GameOverSection} from "../score/Game-over-section";
-import {DiceOption} from "../dice/Dice-option";
-import {ScoreMap, SetOfDice} from "../types";
+import {createDiceNumber, updateDiceNumbers, updateRethrowSelection} from "./dice/dice-functions";
+import {ScoreSheet} from "./score/Score-sheet";
+import {Dice} from "./dice/Dice";
+import {YahtzeeConstants} from "./app-constants";
+import {GameOverSection} from "./score/Game-over-section";
+import {DiceOption} from "./dice/Dice-option";
+import {ScoreMap, SetOfDice} from "./types";
 
 export function App() {
     const [currentDiceNumbers, setCurrentDiceNumbers] = useState<SetOfDice>([createDiceNumber(), createDiceNumber(), createDiceNumber(), createDiceNumber(), createDiceNumber()]);
