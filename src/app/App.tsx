@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import './App.css';
-import {createDiceNumber, SetOfDice, updateDiceNumbers, updateRethrowSelection} from "./diceFunctions";
-import {ScoreSheet} from "./ScoreSheet";
-import {Dice} from "./Dice";
-import {ScoreMap} from "./scoreCalculator";
-import {ScoreConstants} from "./constants";
-import {GameOverSection} from "./GameOverSection";
-import {DiceOption} from "./DiceOption";
+import {createDiceNumber, updateDiceNumbers, updateRethrowSelection} from "../dice/dice-functions";
+import {ScoreSheet} from "../score/Score-sheet";
+import {Dice} from "../dice/Dice";
+import {YahtzeeConstants} from "../app-constants";
+import {GameOverSection} from "../score/Game-over-section";
+import {DiceOption} from "../dice/Dice-option";
+import {ScoreMap, SetOfDice} from "../types";
 
 export function App() {
     const [currentDiceNumbers, setCurrentDiceNumbers] = useState<SetOfDice>([createDiceNumber(), createDiceNumber(), createDiceNumber(), createDiceNumber(), createDiceNumber()]);
@@ -17,12 +17,12 @@ export function App() {
 
     function resetDice() {
         setCurrentDiceNumbers(() => updateDiceNumbers([0, 1, 2, 3, 4], currentDiceNumbers));
-        setRemainingRethrows(ScoreConstants.NUMBER_OF_POSSIBLE_RETHROWS);
+        setRemainingRethrows(YahtzeeConstants.NUMBER_OF_POSSIBLE_RETHROWS);
     }
 
     const updateScore = (newScore: ScoreMap) => {
         setScore(newScore);
-        if (newScore.size === ScoreConstants.NUMBER_OF_SCORE_CATEGORIES) {
+        if (newScore.size === YahtzeeConstants.NUMBER_OF_SCORE_CATEGORIES) {
             setGameOver(true)
         } else {
             resetDice();

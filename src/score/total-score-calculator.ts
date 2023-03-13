@@ -1,6 +1,6 @@
-import {ScoreCategories} from "./scoreCategories";
-import {ScoreConstants} from "./constants";
-import {ScoreMap} from "./scoreCalculator";
+import {ScoreCategories} from "./score-categories";
+import {ScoreConstants} from "../app-constants";
+import {ScoreMap} from "../types";
 
 export function calculateTotal(score: ScoreMap) {
     let total: number = 0;

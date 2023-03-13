@@ -1,8 +1,6 @@
-import {SetOfDice} from "./diceFunctions";
-import {ScoreConstants} from "./constants";
-import {ScoreCategories} from "./scoreCategories";
-
-export type ScoreMap = Map<ScoreCategories, number | null>
+import {ScoreConstants} from "../app-constants";
+import {ScoreCategories} from "./score-categories";
+import {SetOfDice} from "../types";
 
 export function calculateScoreForCategory(dice: SetOfDice, category: ScoreCategories): number {
     switch (category) {

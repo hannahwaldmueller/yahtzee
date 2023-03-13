@@ -1,6 +1,6 @@
-import {createDiceNumber, SetOfDice, updateDiceNumbers, updateRethrowSelection} from "../src/diceFunctions";
+import {createDiceNumber, SetOfDice, updateDiceNumbers, updateRethrowSelection} from "../src/dice/dice-functions";
 
-describe('appFunctions', () => {
+describe('dice-functions', () => {
     describe('createDiceNumber', () => {
         let testNumbers: number[] = [];
         for (let i = 1; i < 100; i++) {

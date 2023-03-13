@@ -1,4 +1,4 @@
-export type SetOfDice = [number, number, number, number, number]
+import {SetOfDice} from "../types";
 
 export function createDiceNumber() {
     return Math.floor(Math.random() * 6 + 1);

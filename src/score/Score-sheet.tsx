@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import {calculateScoreForCategory, ScoreMap} from "./scoreCalculator";
-import {SetOfDice} from "./diceFunctions";
-import {ScoreCategories} from "./scoreCategories";
-import {TestIds} from "./testConstants";
+import {calculateScoreForCategory} from "./score-calculator";
+import {ScoreCategories} from "./score-categories";
+import {TestIds} from "../test-constants";
+import {ScoreMap, SetOfDice} from "../types";
 
 export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCategories, number | null>, updateScore: (newScore: ScoreMap) => void, gameOver: boolean) {
 

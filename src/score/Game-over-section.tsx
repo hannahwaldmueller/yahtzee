@@ -1,6 +1,6 @@
 import React from "react";
-import {calculateTotal} from "./totalScoreCalculator";
-import {ScoreCategories} from "./scoreCategories";
+import {calculateTotal} from "./total-score-calculator";
+import {ScoreCategories} from "./score-categories";
 
 export function GameOverSection(score: Map<ScoreCategories, number | null>, resetGame: () => void) {
 

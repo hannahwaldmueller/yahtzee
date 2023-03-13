@@ -1,8 +1,8 @@
 import React from 'react';
 import {act, fireEvent, render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
-import App from "../src/App";
-import {TestIds} from "../src/testConstants";
+import App from "../src/app/App";
+import {TestIds} from "../src/test-constants";
 
 describe('App', () => {
     it('does not allow more than two rethrows', async () => {
