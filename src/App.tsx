@@ -6,6 +6,7 @@ import {YahtzeeConstants} from "./app-constants";
 import {GameOverSection} from "./score/Game-over-section";
 import {DiceOption} from "./dice/Dice-option";
 import {ScoreMap, SetOfDice} from "./app-types";
+import {Heading} from "./heading/Heading";
 
 export function App() {
     const [currentDiceNumbers, setCurrentDiceNumbers] = useState<SetOfDice>([createDiceNumber(), createDiceNumber(), createDiceNumber(), createDiceNumber(), createDiceNumber()]);
@@ -45,13 +46,16 @@ export function App() {
     if (!gameOver) {
         return (
             <div>
+                <Heading/>
                 {Dice(currentDiceNumbers, diceMarkedForRethrow, toggleRethrowMarker)}
                 {DiceOption(remainingRethrows, diceMarkedForRethrow, currentDiceNumbers, updateDiceAndRethrowCount)}
                 {ScoreSheet(currentDiceNumbers, score, updateScore, gameOver)}
-            </div>);
+            </div>
+        );
     }
     return (
         <div>
+            <Heading/>
             {ScoreSheet(currentDiceNumbers, score, updateScore, gameOver)}
             {GameOverSection(score, resetGame)}
         </div>
