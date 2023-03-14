@@ -14,7 +14,7 @@ export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCatego
         scoreFields.push(
             <tr key={category}
                 onClick={() => setSelectedCategory(category)}
-                className="category-box"
+                className={selectedCategory === category ? "marked category-box" : "category-box"}
                 data-testid={TestIds.categoryButtonPrefix.concat(String(category))}>
                 <td>
                     {ScoreCategories[category]}
