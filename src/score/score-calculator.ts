@@ -1,6 +1,6 @@
-import {ScoreConstants} from "../constants";
+import {ScoreConstants} from "../app-constants";
 import {ScoreCategories} from "./score-categories";
-import {SetOfDice} from "../types";
+import {SetOfDice} from "../app-types";
 
 export function calculateScoreForCategory(dice: SetOfDice, category: ScoreCategories): number {
     switch (category) {

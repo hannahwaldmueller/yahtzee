@@ -1,7 +1,7 @@
 import React from "react";
 import {updateDiceNumbers} from "./dice-functions";
 import {TestIds} from "../test-constants";
-import {SetOfDice} from "../types";
+import {SetOfDice} from "../app-types";
 
 export function DiceOption(remainingRethrows: number, diceMarkedForRethrow: number[], currentDiceNumbers: [number, number, number, number, number], updateDiceAndRethrowCount: (newRemainingRethrows: number, newDiceNumbers: SetOfDice) => void) {
     function onRollDiceButtonClick() {

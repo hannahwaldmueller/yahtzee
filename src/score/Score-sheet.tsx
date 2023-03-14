@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {calculateScoreForCategory} from "./score-calculator";
 import {ScoreCategories} from "./score-categories";
 import {TestIds} from "../test-constants";
-import {ScoreMap, SetOfDice} from "../types";
+import {ScoreMap, SetOfDice} from "../app-types";
 
 export function ScoreSheet(currentDiceNumbers: SetOfDice, score: Map<ScoreCategories, number | null>, updateScore: (newScore: ScoreMap) => void, gameOver: boolean) {
 

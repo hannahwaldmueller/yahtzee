@@ -1,5 +1,5 @@
 import {createDiceNumber, updateDiceNumbers, updateRethrowSelection} from "../src/dice/dice-functions";
-import {SetOfDice} from "../src/types";
+import {SetOfDice} from "../src/app-types";
 
 describe('dice-functions', () => {
     describe('createDiceNumber', () => {
