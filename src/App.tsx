@@ -46,7 +46,7 @@ export function App() {
     if (!gameOver) {
         return (
             <div>
-                <Heading/>
+                {Heading(gameOver)}
                 {Dice(currentDiceNumbers, diceMarkedForRethrow, toggleRethrowMarker)}
                 {DiceOption(remainingRethrows, diceMarkedForRethrow, currentDiceNumbers, updateDiceAndRethrowCount)}
                 {ScoreSheet(currentDiceNumbers, score, updateScore, gameOver)}
@@ -55,7 +55,7 @@ export function App() {
     }
     return (
         <div>
-            <Heading/>
+            {Heading(gameOver)}
             {ScoreSheet(currentDiceNumbers, score, updateScore, gameOver)}
             {GameOverSection(score, resetGame)}
         </div>
