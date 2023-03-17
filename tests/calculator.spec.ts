@@ -21,7 +21,10 @@ const _yahtzee: SetOfDice = [1, 1, 1, 1, 1];
 const almost_yahtzee: SetOfDice = [1, 1, 1, 1, 2];
 const large_strait_1: SetOfDice = [1, 2, 3, 4, 5];
 const large_strait_2: SetOfDice = [2, 3, 4, 5, 6];
-const small_strait: SetOfDice = [1, 2, 3, 4, 6];
+const small_strait_1: SetOfDice = [1, 2, 3, 4, 6];
+const small_strait_2: SetOfDice = [1, 1, 2, 3, 4];
+const small_strait_3: SetOfDice = [1, 3, 4, 5, 6];
+const no_strait: SetOfDice = [1, 2, 3, 5, 6];
 const total_no_bonus: ScoreMap = new Map<ScoreCategories, number | null>([[1, 2], [2, 6], [3, 9], [4, 12], [5, 15], [6, 18], [7, 26], [8, 24], [9, 0], [10, 30], [11, 0], [12, 50], [13, 18]]);
 const total_bonus: ScoreMap = new Map<ScoreCategories, number | null>([[1, 3], [2, 6], [3, 9], [4, 12], [5, 15], [6, 18], [7, 26], [8, 24], [9, 0], [10, 30], [11, 0], [12, 50], [13, 18]]);
 
@@ -58,7 +61,7 @@ describe('scoreCalculator', () => {
             expect(calculateThreeOfAKind(four_of_a_kind)).toEqual(26);
         })
         test('awards zero for small strait', () => {
-            expect(calculateThreeOfAKind(small_strait)).toEqual(0);
+            expect(calculateThreeOfAKind(small_strait_1)).toEqual(0);
         })
     })
     describe('calculateFourOfAKind', () => {
@@ -77,8 +80,17 @@ describe('scoreCalculator', () => {
         })
     })
     describe('calculateSmallStrait', () => {
-        test('accepts 1-2-3-4', () => {
-            expect(calculateSmallStrait(small_strait)).toEqual(ScoreConstants.SMALL_STRAIT);
+        test('accepts 1-2-3-4-6', () => {
+            expect(calculateSmallStrait(small_strait_1)).toEqual(ScoreConstants.SMALL_STRAIT);
+        })
+        test('accepts 1-1-2-3-4', () => {
+            expect(calculateSmallStrait(small_strait_2)).toEqual(ScoreConstants.SMALL_STRAIT);
+        })
+        test('accepts 1-3-4-5-6', () => {
+            expect(calculateSmallStrait(small_strait_3)).toEqual(ScoreConstants.SMALL_STRAIT);
+        })
+        test('awards 0 for 1-2-3-5-6', () => {
+            expect(calculateSmallStrait(no_strait)).toEqual(0);
         })
     })
     describe('calculateLargeStrait', () => {
@@ -89,7 +101,7 @@ describe('scoreCalculator', () => {
             expect(calculateLargeStrait(large_strait_2)).toEqual(ScoreConstants.LARGE_STRAIT);
         })
         test('awards 0 for 1-2-3-4-6', () => {
-            expect(calculateLargeStrait(small_strait)).toEqual(0);
+            expect(calculateLargeStrait(small_strait_1)).toEqual(0);
         })
     })
     describe('calculateYahtzee', () => {

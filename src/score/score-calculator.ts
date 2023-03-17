@@ -71,18 +71,21 @@ export function calculateFourOfAKind(dice: SetOfDice): number {
 }
 
 export function calculateSmallStrait(dice: SetOfDice): number {
-    let numbersWithoutDuplicates = new Set(dice);
-    let countOfDifferentNumbers = numbersWithoutDuplicates.size;
-    if (countOfDifferentNumbers === dice.length) {
+    const sortedDice = dice.sort();
+    if (countMembersOfStrait(sortedDice[0], dice) >= 4 || countMembersOfStrait(sortedDice[1], dice) >= 4) {
         return ScoreConstants.SMALL_STRAIT;
     }
-    if (countOfDifferentNumbers === 4) {
-        let sortedDice = dice.sort();
-        if (sortedDice[3] - sortedDice[0] === 3) {
-            return ScoreConstants.SMALL_STRAIT;
-        }
-    }
     return 0;
+
+    function countMembersOfStrait(firstNumber: number, straitCandidate: number[]) {
+        let count: number = 0;
+        for (let i = 0; i < 4; ++i) {
+            if (straitCandidate.includes(firstNumber + i)) {
+                count += 1;
+            }
+        }
+        return count;
+    }
 }
 
 export function calculateLargeStrait(dice: SetOfDice): number {
@@ -115,4 +118,3 @@ function sumUpDice(dice: number[]) {
     }
     return sum;
 }
-
