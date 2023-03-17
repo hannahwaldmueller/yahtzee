@@ -62,8 +62,7 @@ export function calculateThreeOfAKind(dice: SetOfDice): number {
 }
 
 export function calculateFourOfAKind(dice: SetOfDice): number {
-    let numbersWithoutDuplicates = new Set(dice);
-    if (numbersWithoutDuplicates.size < 3) {
+    if (dice.filter((die) => die === dice[0]).length >= 4 || dice.filter((die) => die === dice[1]).length >= 4) {
         return sumUpDice(dice);
     }
     return 0;
@@ -71,15 +70,8 @@ export function calculateFourOfAKind(dice: SetOfDice): number {
 
 export function calculateSmallStrait(dice: SetOfDice): number {
     let numbersWithoutDuplicates = new Set(dice);
-    let countOfDifferentNumbers = numbersWithoutDuplicates.size;
-    if (countOfDifferentNumbers === dice.length) {
+    if (numbersWithoutDuplicates.size >= 4 && (isSuperset(numbersWithoutDuplicates, [1, 2, 3, 4]) || isSuperset(numbersWithoutDuplicates, [2, 3, 4, 5]) || isSuperset(numbersWithoutDuplicates, [3, 4, 5, 6]))) {
         return ScoreConstants.SMALL_STRAIT;
-    }
-    if (countOfDifferentNumbers === 4) {
-        let sortedDice = dice.sort();
-        if (sortedDice[3] - sortedDice[0] === 3) {
-            return ScoreConstants.SMALL_STRAIT;
-        }
     }
     return 0;
 }
@@ -113,5 +105,14 @@ function sumUpDice(dice: number[]) {
         sum += die;
     }
     return sum;
+}
+
+function isSuperset(set: Set<number>, subset: number[]): boolean {
+  for (const elem of subset) {
+    if (!set.has(elem)) {
+      return false;
+    }
+  }
+  return true;
 }
 
