@@ -5,9 +5,9 @@ You can roll the dice up to three times in a turn to make various scoring combin
 A game consists of thirteen rounds. After each round, choose a scoring category for that round.
 You get to use each category precisely once per game.
 
-In the upper section of the scoring table (from "Aces" to "Sixes") only dice showing a
+In the Upper Section of the scoring table (from "Aces" to "Sixes"), only dice showing a
 certain number are taken into account for scoring. If you score 63 points or more in the
-upper section, you get awarded a Bonus of 35 points.
+Upper Section, you get awarded a Bonus of 35 points.
 
 As long as three or, respectively, four dice are the same, your score equals the sum of all dice
 for categories Three Of A Kind and Four Of A Kind.
@@ -16,7 +16,7 @@ Small Strait (four sequential dice) scores 30 points, Large Strait (five sequent
 If all dice are the same, you have a Yahtzee, which is worth 50 points.
 For Chance, anything goes and all dice count.
 
-### Play Yahtzee
+### Let's play!
 
 First, run `npm install` in the root folder.
 
