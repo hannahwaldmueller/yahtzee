@@ -1,6 +1,6 @@
 {
   "testMatch": [
-    "<rootDir>\\tests\\**"
+    "<rootDir>/tests/**"
   ],
   "testEnvironment": "jsdom",
   "moduleNameMapper": {
