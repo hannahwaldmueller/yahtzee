@@ -20,7 +20,7 @@ For Chance, anything goes and all dice count.
 
 First, run `npm install` in the root folder.
 
-Afterwards, `npm run` runs the app in the development mode.
+Afterwards, `npm run start` runs the app in the development mode.
 You can now play on [http://localhost:3000](http://localhost:3000).
 
 To execute the jest tests, run `npm test`.
