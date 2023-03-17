@@ -66,6 +66,11 @@ describe('scoreCalculator', () => {
             expect(calculateFourOfAKind(four_of_a_kind)).toEqual(26);
         })
     })
+    describe('calculateFourOfAKind', () => {
+        test('awards zero for full house', () => {
+            expect(calculateFourOfAKind(full_house)).toEqual(0);
+        })
+    })
     describe('calculateFullHouse', () => {
         test('accepts full house', () => {
             expect((calculateFullHouse(full_house))).toEqual(ScoreConstants.FULL_HOUSE);

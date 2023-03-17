@@ -62,8 +62,9 @@ export function calculateThreeOfAKind(dice: SetOfDice): number {
 }
 
 export function calculateFourOfAKind(dice: SetOfDice): number {
-    let numbersWithoutDuplicates = new Set(dice);
-    if (numbersWithoutDuplicates.size < 3) {
+    const instancesOfFirstDie = dice.filter((die) => die === dice[0]);
+    const instancesOfSecondDie = dice.filter((die) => die === dice[1]);
+    if (instancesOfFirstDie.length >= 4 || instancesOfSecondDie.length >= 4) {
         return sumUpDice(dice);
     }
     return 0;
