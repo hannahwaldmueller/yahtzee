@@ -18,7 +18,9 @@ For Chance, anything goes and all dice count.
 
 ### Let's play!
 
-First, run `npm install` in the root folder.
+Yahtzee is available on [http://hannahwaldmueller.github.io/yahtzee](http://hannahwaldmueller.github.io/yahtzee)
+
+To play to on your machine, download the code and run `npm install` in the root folder.
 
 Afterwards, `npm run start` runs the app in the development mode.
 You can now play on [http://localhost:3000](http://localhost:3000).
