@@ -15,6 +15,6 @@ export function updateDiceNumbers(diceToRethrow: number[], currentDiceNumbers: S
     const newDiceNumbers: number[] =
         currentDiceNumbers.map((diceNumber, index) => (
             (diceToRethrow.includes(index)) ? createDiceNumber() : diceNumber
-        ))
-    return newDiceNumbers as SetOfDice;
+        ));
+    return newDiceNumbers.sort() as SetOfDice;
 }

@@ -39,14 +39,14 @@ describe('dice-functions', () => {
         const dice_2_4: number[] = [2, 4];
         test('keeps unselected dice as they were', () => {
             const updated = updateDiceNumbers(dice_2_4, set_7_7_7_7_7);
-            expect(updated[0]).toEqual(set_7_7_7_7_7[0]);
-            expect(updated[1]).toEqual(set_7_7_7_7_7[1]);
+            expect(updated[2]).toEqual(set_7_7_7_7_7[2]);
             expect(updated[3]).toEqual(set_7_7_7_7_7[3]);
+            expect(updated[4]).toEqual(set_7_7_7_7_7[4]);
         })
         test('updates selected dice', () => {
             const updated = updateDiceNumbers(dice_2_4, set_7_7_7_7_7);
-            expect(updated[2]).not.toEqual(7);
-            expect(updated[4]).not.toEqual(7);
+            expect(updated[0]).not.toEqual(7);
+            expect(updated[1]).not.toEqual(7);
         })
     })
 })
