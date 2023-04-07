@@ -40,6 +40,13 @@ export function App() {
         dataFetch();
     }, []);
 
+    useEffect(() => {
+        const removeRethrowSelectionMarkup = () => {
+            setDiceForRethrow([]);
+        };
+        removeRethrowSelectionMarkup();
+    }, [currentDiceNumbers]);
+
     function resetDice() {
         const newDiceNumbers: SetOfDice = updateDiceNumbers([0, 1, 2, 3, 4], currentDiceNumbers);
         setCurrentDiceNumbers(() => newDiceNumbers);
