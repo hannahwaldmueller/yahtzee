@@ -7,7 +7,14 @@ import {GameOverSection} from "./score/Game-over-section";
 import {DiceOption} from "./dice/Dice-option";
 import {ScoreMap, SetOfDice} from "./app-types";
 import {Heading} from "./heading/Heading";
-import {parseGameOverFromSession, parseScoreFromSession, writeToSessionStorage} from "./parser";
+import {
+    parseDiceNumbersFromSession,
+    parseGameOverFromSession,
+    parseRemainingRethrowsFromSession,
+    parseScoreFromSession,
+    writeDiceDataToSessionStorage,
+    writeScoreDataToSessionStorage
+} from "./parser";
 
 export function App() {
     const [currentDiceNumbers, setCurrentDiceNumbers] = useState<SetOfDice>([createDiceNumber(), createDiceNumber(), createDiceNumber(), createDiceNumber(), createDiceNumber()]);
@@ -19,27 +26,33 @@ export function App() {
     useEffect(() => {
         const dataFetch = async () => {
             const scoreData: string | null = sessionStorage.getItem("scoreData");
-
+            const diceData: string | null = sessionStorage.getItem("diceData");
 
             if (scoreData !== null) {
                 setScore(parseScoreFromSession(scoreData));
                 setGameOver(parseGameOverFromSession(scoreData));
+            }
+            if (diceData !== null) {
+                setCurrentDiceNumbers(parseDiceNumbersFromSession(diceData));
+                setRemainingRethrows(parseRemainingRethrowsFromSession(diceData));
             }
         };
         dataFetch();
     }, []);
 
     function resetDice() {
-        setCurrentDiceNumbers(() => updateDiceNumbers([0, 1, 2, 3, 4], currentDiceNumbers));
+        const newDiceNumbers: SetOfDice = updateDiceNumbers([0, 1, 2, 3, 4], currentDiceNumbers);
+        setCurrentDiceNumbers(() => newDiceNumbers);
         setRemainingRethrows(YahtzeeConstants.NUMBER_OF_POSSIBLE_RETHROWS);
+        writeDiceDataToSessionStorage(newDiceNumbers, YahtzeeConstants.NUMBER_OF_POSSIBLE_RETHROWS);
     }
 
     const updateScore = (newScore: ScoreMap) => {
         setScore(newScore);
-        writeToSessionStorage(newScore, gameOver);
+        writeScoreDataToSessionStorage(newScore, gameOver);
         if (newScore.size === YahtzeeConstants.NUMBER_OF_SCORE_CATEGORIES) {
             setGameOver(true)
-            writeToSessionStorage(newScore, true);
+            writeScoreDataToSessionStorage(newScore, true);
         } else {
             resetDice();
         }
@@ -57,6 +70,7 @@ export function App() {
     const updateDiceAndRethrowCount = (newRemainingRethrows: number, newDiceNumbers: SetOfDice) => {
         setRemainingRethrows(newRemainingRethrows);
         setCurrentDiceNumbers(newDiceNumbers);
+        writeDiceDataToSessionStorage(newDiceNumbers, newRemainingRethrows);
         setDiceForRethrow([]);
     };
 
