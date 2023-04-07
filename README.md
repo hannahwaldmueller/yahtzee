@@ -25,4 +25,4 @@ To play to on your machine, download the code and run `npm install` in the root 
 Afterwards, `npm run start` runs the app in the development mode.
 You can now play on [http://localhost:3000](http://localhost:3000).
 
-To execute the jest tests, run `npm test`.
+To execute the jest tests, run `npm run test`.
