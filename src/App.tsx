@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {createDiceNumber, updateDiceNumbers, updateRethrowSelection} from "./dice/dice-functions";
 import {ScoreSheet} from "./score/Score-sheet";
 import {Dice} from "./dice/Dice";
@@ -15,6 +15,24 @@ export function App() {
     const [score, setScore] = useState<ScoreMap>(new Map());
     const [gameOver, setGameOver] = useState<boolean>(false);
 
+    useEffect(() => {
+        const dataFetch = async () => {
+            const data: string | null = sessionStorage.getItem("score");
+            const diceData: string | null = sessionStorage.getItem("currentDiceNumbers");
+            const rethrowData: string | null = sessionStorage.getItem("remainingRethrows");
+
+            if (data !== null) {
+                let storedScore: ScoreMap = new Map(JSON.parse(data)) as ScoreMap;
+                setScore(storedScore);
+                // @ts-ignore
+                const storedStatus: string = sessionStorage.getItem("gameOver");
+                setGameOver(JSON.parse(storedStatus));
+            }
+        };
+
+        dataFetch();
+    }, [score]);
+
     function resetDice() {
         setCurrentDiceNumbers(() => updateDiceNumbers([0, 1, 2, 3, 4], currentDiceNumbers));
         setRemainingRethrows(YahtzeeConstants.NUMBER_OF_POSSIBLE_RETHROWS);
@@ -22,8 +40,10 @@ export function App() {
 
     const updateScore = (newScore: ScoreMap) => {
         setScore(newScore);
+        sessionStorage.setItem("score", JSON.stringify(Array.from(newScore.entries())));
         if (newScore.size === YahtzeeConstants.NUMBER_OF_SCORE_CATEGORIES) {
             setGameOver(true)
+            sessionStorage.setItem("gameOver", "true");
         } else {
             resetDice();
         }
@@ -33,6 +53,7 @@ export function App() {
     }
 
     const resetGame = () => {
+        sessionStorage.clear();
         setScore(new Map());
         resetDice();
         setGameOver(false);
