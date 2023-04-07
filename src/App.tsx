@@ -7,6 +7,7 @@ import {GameOverSection} from "./score/Game-over-section";
 import {DiceOption} from "./dice/Dice-option";
 import {ScoreMap, SetOfDice} from "./app-types";
 import {Heading} from "./heading/Heading";
+import {parseGameOverFromSession, parseScoreFromSession, writeToSessionStorage} from "./parser";
 
 export function App() {
     const [currentDiceNumbers, setCurrentDiceNumbers] = useState<SetOfDice>([createDiceNumber(), createDiceNumber(), createDiceNumber(), createDiceNumber(), createDiceNumber()]);
@@ -17,21 +18,16 @@ export function App() {
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data: string | null = sessionStorage.getItem("score");
-            const diceData: string | null = sessionStorage.getItem("currentDiceNumbers");
-            const rethrowData: string | null = sessionStorage.getItem("remainingRethrows");
+            const scoreData: string | null = sessionStorage.getItem("scoreData");
 
-            if (data !== null) {
-                let storedScore: ScoreMap = new Map(JSON.parse(data)) as ScoreMap;
-                setScore(storedScore);
-                // @ts-ignore
-                const storedStatus: string = sessionStorage.getItem("gameOver");
-                setGameOver(JSON.parse(storedStatus));
+
+            if (scoreData !== null) {
+                setScore(parseScoreFromSession(scoreData));
+                setGameOver(parseGameOverFromSession(scoreData));
             }
         };
-
         dataFetch();
-    }, [score]);
+    }, []);
 
     function resetDice() {
         setCurrentDiceNumbers(() => updateDiceNumbers([0, 1, 2, 3, 4], currentDiceNumbers));
@@ -40,10 +36,10 @@ export function App() {
 
     const updateScore = (newScore: ScoreMap) => {
         setScore(newScore);
-        sessionStorage.setItem("score", JSON.stringify(Array.from(newScore.entries())));
+        writeToSessionStorage(newScore, gameOver);
         if (newScore.size === YahtzeeConstants.NUMBER_OF_SCORE_CATEGORIES) {
             setGameOver(true)
-            sessionStorage.setItem("gameOver", "true");
+            writeToSessionStorage(newScore, true);
         } else {
             resetDice();
         }

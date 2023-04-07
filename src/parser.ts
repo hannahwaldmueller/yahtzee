@@ -1,25 +1,20 @@
-import {ScoreMap, SetOfDice} from "./app-types";
+import {ScoreMap} from "./app-types";
 
-export function writeToSessionStorage(score: ScoreMap, gameOver: boolean, currentDiceNumbers: SetOfDice, remainingRethrows: number) {
+export function writeToSessionStorage(score: ScoreMap, gameOver: boolean) {
     const scoreData: string = JSON.stringify(Array.from(score.entries()));
+    const gameOverData: string = JSON.stringify(gameOver);
 
-    const scoreDataToStore = Array.from(scoreData,
-        gameOver.toString);
-
-    const diceDataToStore = Array.from(currentDiceNumbers as Array<number>,
-        remainingRethrows.toString);
+    let scoreDataToStore: [string, string] = [scoreData, gameOverData];
 
     sessionStorage.setItem("scoreData", JSON.stringify(scoreDataToStore));
 }
 
-export function retrieveScoreFromSession() {
-    const storedScoreData = sessionStorage.getItem("scoreData");
-
-    function scoreReviver() {
-        console.log(storedScoreData);
-    }
-
-    if (storedScoreData !== null) {
-        const storedScore = JSON.parse(storedScoreData, scoreReviver);
-    }
+export function parseScoreFromSession(storedScoreData: string) {
+    const unwrappedData: string[] = JSON.parse(storedScoreData);
+    return new Map(JSON.parse(unwrappedData[0])) as ScoreMap;
 };
+
+export function parseGameOverFromSession(storedScoreData: string) {
+    const unwrappedData: string[] = JSON.parse(storedScoreData);
+    return JSON.parse(unwrappedData[1]);
+}
